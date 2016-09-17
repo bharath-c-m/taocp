@@ -5,13 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import art.of.programming.exception.StorageEmptyException;
 import art.of.programming.exception.StorageFullException;
-import mockit.integration.junit4.JMockit;
 public class StackTest {
 	
 	/**
