@@ -1,0 +1,1 @@
+The code in this git repo is my attempt to implement problems and alogrithms from the famous book "THE ART OF COMPUTER PROGRAMMING". I am currently reading this book and I will try to implement problems from this book as I get a chance to. The solutions are my own and is no way definitive or the best solution. Like any problem there is always a better way to do it.
