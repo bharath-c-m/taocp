@@ -28,7 +28,7 @@ public class StackLinkedAllocation {
 			n.val = i;
 			avail = n;
 		}
-		l.info("Node is {}",avail);
+		l.debug("Node is {}",avail);
 	}
 	
 	public void push(int y) {
