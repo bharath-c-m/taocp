@@ -9,18 +9,19 @@ import art.of.programming.exception.StorageFullException;
 /**
  * A stack that uses linked allocation
  * 
- * @author ChinnaBX
+ * @author bharathm
  *
  */
 public class StackLinkedAllocation {
 
-	Node top;
+	Node top; //top element in the stack
 	
-	Node avail;
+	Node avail; //Storage pool
 	
 	Logger l = LoggerFactory.getLogger(StackLinkedAllocation.class);
 	
 	public StackLinkedAllocation(int size) {
+		//size represents the size of the storage pool
 		for(int i = 0; i < size; i++) {
 			Node n = new Node();
 			n.next = avail;
