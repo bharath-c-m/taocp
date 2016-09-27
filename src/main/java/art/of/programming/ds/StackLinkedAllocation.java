@@ -32,10 +32,7 @@ public class StackLinkedAllocation {
 	}
 	
 	public void push(int y) {
-		if(avail == null)
-			throw new StorageFullException("Stack is full");
-		Node p = avail;
-		avail = avail.next;
+		Node p = getObjectFromStoragePool();
 		p.val = y;
 		p.next = top;
 		top = p;
@@ -47,9 +44,25 @@ public class StackLinkedAllocation {
 		Node p = top;
 		top = p.next;
 		int y = p.val;
-		p.next = avail;
-		avail = p;
+		returnObjectToStoragePool(p);
 		return y;
+	}
+	
+	//AVAIL <= P
+	private void returnObjectToStoragePool(Node p) {
+		if(p != null) {
+			p.next = avail;
+			avail = p;
+		}
+	}
+	
+//	P <= AVAIL
+	private Node getObjectFromStoragePool() {
+		if(avail == null) 
+			throw new StorageFullException("Stack is full");
+		Node p = avail;
+		avail = avail.next;
+		return p;
 	}
 	
 	
