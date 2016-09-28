@@ -20,7 +20,7 @@ public class QueueLinkedAllocation {
 	}
 	
 	public void offer(int y) {
-		//Oveflow is handled in this api call.
+		//Oveflow is handled in getNodeFromStoragePool() api call.
 		Node p = getNodeFromStoragePool(); 
 		p.val = y;
 		p.next = null; //Cleaning up p
@@ -78,4 +78,49 @@ public class QueueLinkedAllocation {
 			avail = p;
 		}
 	}
+	
+	//Make the queue a deque
+	//chapter 2.2.3 Exercise 5
+	//Adding API offerFront(int y)
+	public void offerFront(int y) {
+		Node p = getNodeFromStoragePool();
+		p.val = y;
+		p.next = null; //Cleaning up p
+		if(isEmpty()) {
+			front = rear = p;
+		} else {
+			p.next = front;
+			front = p;
+		}
+	}
+	
+
+	//Make the queue a deque
+	//chapter 2.2.3 Exercise 5
+	//Adding API pollRear()
+	//This is terribly in-efficient with a (single)linked list. 
+	// A double linked list will compromise on storage, but is an efficient way
+	// in terms of performance
+	public int pollRear() {
+		if(isEmpty())
+			throw new StorageEmptyException("Queue is empty");
+		Node p = rear;
+		int y = p.val;
+		Node n = front;
+		//starting to walk through the nodes to get the penultimate node
+		//And set it to rear
+		if(n.next == null) {
+			//The queue has got only a single node
+			front = rear = null;
+		} else {
+			while(n.next.next != null) {
+				n = n.next;
+			}
+			rear = n;
+			rear.next = null;
+		}
+		returnNodeToStoragePool(p);
+		return y;
+	}
+	
 }
