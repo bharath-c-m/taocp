@@ -2,8 +2,8 @@ package art.of.programming.ds;
 
 public class Node {
 
-	int val;
-	Node next;
+	public int val;
+	public Node next;
 	
 	public String toString() {
 		if(next == null)
