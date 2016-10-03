@@ -44,6 +44,9 @@ public class CircularList<T> {
 		PTR.next = p.next;
 		T y = p.value;
 		returnNodeToStoragePool(p);
+		if(PTR == p) {
+			PTR = null;
+		}
 		return y;
 	}
 	

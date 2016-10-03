@@ -87,5 +87,72 @@ public class CircularListTest {
 		}
 		
 	}
+	
+	@Test
+	public void circularListAsStack() {
+		CircularList<Integer> c = new CircularList<>(5);
+		c.insertLeft(10); //PUSH
+		c.insertLeft(20);//PUSH
+		assertEquals(20, c.removeFromLeft().intValue());//POP
+		assertEquals(10, c.removeFromLeft().intValue());//POP
+		try {
+			c.removeFromLeft();
+			fail("CircularList as Stack must have been empty");
+		} catch(StorageEmptyException e) {
+			//All is well
+		}
+		assertTrue(c.isEmpty());
+		c.insertLeft(30);
+		c.insertLeft(40);
+		c.insertLeft(50);
+		c.insertLeft(60);
+		c.insertLeft(70);
+		assertTrue(c.isFull());
+		try {
+			c.insertLeft(80);
+			fail("CircularList as Stack must have been full");
+		} catch(StorageFullException e) {
+			//All is well
+		}
+		assertEquals(70, c.removeFromLeft().intValue());
+		c.removeFromLeft();
+		c.removeFromLeft();
+		c.removeFromLeft();
+		assertEquals(30, c.removeFromLeft().intValue());
+		assertNull(c.PTR);
+		assertTrue(c.isEmpty());
+	}
+	
+	@Test
+	public void circularListAsQueue() {
+		CircularList<String> c = new CircularList<>(3);
+		assertTrue(c.isEmpty());
+		assertFalse(c.isFull());
+		c.insertRight("A");
+		c.insertRight("B");
+		c.insertRight("C");
+		assertTrue(c.isFull());
+		assertFalse(c.isEmpty());
+		try {
+			c.insertRight("D");
+			fail("CircularList as Queue must have been full");
+		} catch (StorageFullException e) {
+			//All is well
+		}
+		
+		assertEquals("A", c.removeFromLeft());
+		assertEquals("B", c.removeFromLeft());
+		assertEquals("C", c.removeFromLeft());
+		try {
+			c.removeFromLeft();
+			fail("CircularList as Queue must have been empty");
+		} catch(StorageEmptyException e) {
+			//All is well
+		}
+		
+		assertTrue(c.isEmpty());
+		assertFalse(c.isFull());
+		
+	}
 
 }
