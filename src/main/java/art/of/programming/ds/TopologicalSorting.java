@@ -99,6 +99,9 @@ public class TopologicalSorting {
 	
 	public void printOutput() {
 		l.debug("Printing topological sort order - "+F);
+		//We don't have to print this
+		//Once the program is done, there is a way to arrive at the 
+		//topological order from QLINK array populated
 		l.info(""+F);
 		if(F != 0 ) {
 			N-=1;
@@ -110,6 +113,7 @@ public class TopologicalSorting {
 				eraseRelation(p);
 			}
 		} else {
+			l.info("QLINK[] is {}",Arrays.toString(QLINK));
 			//T8 - End of program
 			if(N == 0) {
 				l.info("End of program");
