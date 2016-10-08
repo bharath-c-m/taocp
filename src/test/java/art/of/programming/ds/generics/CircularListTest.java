@@ -1,6 +1,8 @@
 package art.of.programming.ds.generics;
 
 import static org.junit.Assert.*;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import art.of.programming.exception.StorageEmptyException;
@@ -153,6 +155,43 @@ public class CircularListTest {
 		assertTrue(c.isEmpty());
 		assertFalse(c.isFull());
 		
+	}
+
+	@Test
+	public void testReverse() throws Exception {
+		CircularList<Integer> c = new CircularList<>(5);
+		c.insertLeft(1);c.insertLeft(2);c.insertLeft(3);c.insertLeft(4);c.insertLeft(5);
+		Node<Integer> first = c.getFirst();
+		assertEquals(1, first.value.intValue());
+		assertEquals(5, first.next.value.intValue());
+		assertEquals(4, first.next.next.value.intValue());
+		assertEquals(3, first.next.next.next.value.intValue());
+		assertEquals(2, first.next.next.next.next.value.intValue());
+//		5-4-3-2-1->PTR
+		
+		c.reverse();
+//		Expected
+//		2-3-4-5-1-PTR
+		
+		first = c.getFirst();
+		assertEquals(1, first.value.intValue());
+		assertEquals(2, first.next.value.intValue());
+		assertEquals(3, first.next.next.value.intValue());
+		assertEquals(4, first.next.next.next.value.intValue());
+		assertEquals(5, first.next.next.next.next.value.intValue());
+	}
+	
+	@Test
+	public void testPeek() throws Exception {
+		CircularList<String> c = new CircularList<>(5);
+		assertNull(c.peek());
+		c.insertLeft("Hi");
+		assertEquals("Hi", c.peek());
+		c.insertLeft("Hello");
+		assertEquals("Hi", c.peek());
+		c.insertRight("How Are U!!");
+		assertEquals("How Are U!!", c.peek());
+
 	}
 
 }

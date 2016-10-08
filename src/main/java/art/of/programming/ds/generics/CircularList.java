@@ -7,7 +7,10 @@ public class CircularList<T> {
 
 	Node<T> avail; //Storage pool stack
 	
-	Node<T> PTR;
+	Node<T> PTR; //Pointer to the right most node
+	
+	//This implementation of circular list does not use a head element.
+	//Although it can be very handy
 	
 	public CircularList(int size) {
 		while(size-->0) {
@@ -58,6 +61,14 @@ public class CircularList<T> {
 		return avail == null;
 	}
 	
+	public T peek() {
+		if(PTR != null) {
+			return PTR.value;
+		} else {
+			return null;
+		}
+	}
+	
 //	P <= AVAIL {p = AVAIL; AVAIL=AVAIL.next}
 	public Node<T> getNodeFromStoragePool() {
 		if(avail == null)
@@ -87,5 +98,20 @@ public class CircularList<T> {
 			PTR.next = p;
 			PTR = null;
 		}
+	}
+	
+	public void reverse() {
+		Node<T> r = null;
+		Node<T> p = PTR;
+		while(p!= null) {
+			Node<T> f = p;
+			p = p.next;
+			f.next = r;
+			r = f;
+		}
+	}
+	
+	public Node<T> getFirst() {
+		return PTR;
 	}
 }
