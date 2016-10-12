@@ -1,10 +1,14 @@
 package art.of.programming.ds.generics;
 
 import static org.junit.Assert.*;
+
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
 
 import art.of.programming.exception.StorageFullException;
-import junit.framework.AssertionFailedError;
 
 public class StackLinkedAllocationTest {
 
@@ -44,5 +48,43 @@ public class StackLinkedAllocationTest {
 		assertFalse(s.isFull());
 		s.push("away");
 		
+	}
+
+	@Test
+	public void testIterator() throws Exception {
+		StackLinkedAllocation<Integer> s = new StackLinkedAllocation<>(5);
+		Iterator<Integer> it = s.iterator();
+		assertFalse(it.hasNext());
+		s.push(10);
+		it = s.iterator();
+		assertTrue(it.hasNext());
+		assertEquals(10, it.next().intValue());
+		assertFalse(it.hasNext());
+		s.push(20);
+		try {
+			it.hasNext();
+			fail("Expected ConcurrentModificationException");
+		} catch (ConcurrentModificationException e) {
+			//All is well
+		}it = s.iterator();
+		assertTrue(it.hasNext());
+		s.push(30);
+		try {
+			it.next();
+			fail("Expected ConcurrentModificationException");
+		} catch (ConcurrentModificationException e) {
+			//All is well
+		}
+		it = s.iterator();
+		assertEquals(30, it.next().intValue());
+		assertEquals(20, it.next().intValue());
+		assertEquals(10, it.next().intValue());
+		assertFalse(it.hasNext());
+		try {
+			it.next();
+			fail("Expected NoSuchElementException");
+		} catch (NoSuchElementException e) {
+			//All is well
+		}
 	}
 }

@@ -1,5 +1,9 @@
 package art.of.programming.ds.generics;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,5 +72,42 @@ public class StackLinkedAllocation<T> {
 		p.next = avail;
 		avail = p;
 	}
+	
+	public Iterator<T> iterator() {
+		return new StackLinkedAllocationIterator();
+	}
+	
+	private class StackLinkedAllocationIterator implements Iterator<T> {
+
+		/**
+		 * A simple iterator that keeps track of updates 
+		 * and throws exception on iterators whose underlying data is updated
+		 */
+		Node<T> localTopAtTheTimeOfIteratorInstatiation = top;
+		
+		Node<T> curr = top; //Node for iteration
+		
+		@Override
+		public boolean hasNext() {
+			if(top!=localTopAtTheTimeOfIteratorInstatiation)
+				throw new ConcurrentModificationException("Stack updated");
+			return curr!=null;
+		}
+
+		@Override
+		public T next() {
+			if(top!=localTopAtTheTimeOfIteratorInstatiation)
+				throw new ConcurrentModificationException("Stack updated");
+			if(curr == null) {
+				throw new NoSuchElementException("Stack is empty");
+			}
+			T t = curr.value;
+			curr = curr.next;
+			return t;
+		}
+		
+	}
+	
+	
 
 }
