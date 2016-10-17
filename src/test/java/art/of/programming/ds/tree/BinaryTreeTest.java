@@ -81,6 +81,40 @@ public class BinaryTreeTest {
 	}
 	
 	private BinaryTree<String> getTestTree() {
+		
+		/**
+		 * Test tree
+		 * 	
+		 * 					A
+		 * 				  /   \
+		 * 				 B     C
+		 *              /	  /	 \
+		 *   		   /	 /	  \
+		 * 			  /		/  	   \
+		 * 			 D 	   E	    F
+		 * 					\	   / \
+		 * 					 G	  H	  J
+		 * 
+		 */
+		
+		/**
+		 * In-Oreder traversal
+		 * D-B-A-E-G-C-H-F-J
+		 * 
+		 */
+		
+		/**
+		 * Pre-Order traversal
+		 * A-B-D-C-E-G-F-H-J
+		 * 
+		 */
+		
+		/**
+		 * Post-Order traversal
+		 * D-B-G-E-H-J-F-C-A
+		 * 
+		 */
+		
 		Node<String> root = getNode("A");
 		Node<String> b = getNode("B");
 		Node<String> c = getNode("C");
@@ -116,13 +150,19 @@ public class BinaryTreeTest {
 		 */
 		
 		/**
-		 * In-Order traversal iteration
+		 * In-Order traversal
 		 *	B-A-C 
 		 */
 		
 		/**
-		 * Pre-Order traversal iteration
+		 * Pre-Order traversal
 		 * A-B-C
+		 */
+		
+		/**
+		 * Post-Order traversal 
+		 * B-C-A
+		 * 
 		 */
 		
 		Node<String> root = getNode("A");
