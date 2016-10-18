@@ -13,6 +13,8 @@ import art.of.programming.ds.generics.StackLinkedAllocation;
  * A simple parameterized binary tree implementation that exposes iterators
  * to traverse the tree in-order and pre-order.
  * 
+ * @see BinaryTreeTest for examples on a simple binary tree
+ * 
  * TODO Implement post-order
  * 
  */
