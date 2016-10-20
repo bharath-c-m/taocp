@@ -1,5 +1,10 @@
 package art.of.programming.ds.tree;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import art.of.programming.ds.generics.CircularList;
+
 /**
  * Test tree
  * 	
@@ -46,10 +51,25 @@ package art.of.programming.ds.tree;
 public class ThreadedBinaryTree<T> {
 
 	
+	CircularList<Node<T>> s;
+	
+	Node<T> head;
+	
 	Node<T> T;
+	
+	Logger l = LoggerFactory.getLogger(ThreadedBinaryTree.class);
 	
 	public ThreadedBinaryTree(Node<T> root) {
 		T = root;
+	}
+	
+	
+	public ThreadedBinaryTree() {
+		//This means the tree grows by inserting items to the left of the circular tree
+		head = new Node<>();
+		head.RLINK = head.LLINK = head;
+		head.RTAG = 0;
+		head.LTAG = 1;
 	}
 	
 	//TAOCP notation - when P is a node in a threaded tree, P$ is the successor node IN-ORDER
@@ -93,4 +113,47 @@ public class ThreadedBinaryTree<T> {
 		}
 	}
 	
+	public Node<T> insertLeftSubTree(Node<T> p, T t) {
+		Node<T> q = new Node<>();
+		q.t = t;
+		
+		q.LTAG = p.LTAG;
+		q.LLINK = p.LLINK;
+		p.LLINK = q;
+		p.LTAG = 0;
+		q.RTAG = 1;
+		q.RLINK = p;
+		
+		if(q.LTAG == 0) {
+			Node<T> qPredecessor = getPredecessorInOrder(q);
+			qPredecessor.RLINK = q;
+		}
+		
+		return q;
+			
+	}
+	
+	public Node<T> insertRightSubTree(Node<T> p, T t) {
+		if(p == head) {
+			throw new RuntimeException ("Cannot insert a right sub-tree for the head");
+		}
+		Node<T> q = new Node<>();
+		q.t = t;
+		q.RTAG = p.RTAG;
+		q.RLINK = p.RLINK;
+		p.RLINK = q;
+		p.RTAG = 0;
+		q.LTAG = 1;
+		q.LLINK = p;
+		if(q.RTAG == 0) {
+			//This means a node was inserted in the middle
+			Node<T> qSuccessor = getSuccessorInOrder(q);
+			qSuccessor.LLINK = q;
+		}
+		return q;
+	}
+	
+	public Node<T> getHead() {
+		return head;
+	}
 }
