@@ -36,5 +36,17 @@
   		<artifactId>jmockit</artifactId>
   		<version>1.19</version>
   	</dependency>
+  <dependency>
+    <groupId>edu.princeton.cs.introcs</groupId>
+    <artifactId>stdlib-package</artifactId>
+    <version>1.0</version>
+  </dependency>
   </dependencies>
+  <repositories>
+  <repository>
+    <id>org.coursera.algs4</id>
+    <name>Algs4 coursera course custom repository</name>
+    <url>https://raw.github.com/slok/algs4-mvn-repo/master</url>
+  </repository>
+</repositories>
 </project>
