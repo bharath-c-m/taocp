@@ -16,7 +16,11 @@ import edu.princeton.cs.introcs.StdIn;
  * 
  * Executing the app with tinyUF.txt results in 2 components
  * Executing the app with mediumUF.txt results in 3 components
- * Executing the app with largeUF.txt results in 6 components Caution: This takes a very long time. @see QuickUnionFind.java for improved performance
+ * Executing the app with largeUF.txt results in 6 components 
+ *  
+ * Caution: Testing largeUF.txt using this algorithm takes a very long time. It took about 16 minutes in my machine. 
+ * @see QuickUnionFind.java for improved performance
+ * 
  * 
  */
 public class UnionFind {
@@ -45,6 +49,7 @@ public class UnionFind {
 		if(pId == qId) {
 			return;
 		}
+		//This 
 		for(int i=0; i<id.length; i++) {
 			if(id[i] == pId) {
 				id[i] = qId;
