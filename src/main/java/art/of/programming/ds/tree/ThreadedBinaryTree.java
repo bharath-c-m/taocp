@@ -156,4 +156,30 @@ public class ThreadedBinaryTree<T> {
 	public Node<T> getHead() {
 		return head;
 	}
+	
+	public Node<T> getSuccessorPreOrder(Node<T> p) {
+		Node<T> q = null;
+		if(p.LTAG == 0)
+			q = p.LLINK;
+		else {
+			q = p;
+			while(q.RTAG != 0) {
+				q = q.RLINK;
+			}
+			q = q.RLINK;
+		}
+		return q;
+	}
+	
+	public Node<T> getPredecessorPreOrder(Node<T> p) {
+		throw new RuntimeException("Implement");
+	}
+	
+	public Node<T> getSuccessorPostOrder(Node<T> p) {
+		throw new RuntimeException("Implement");
+	}
+	
+	public Node<T> getPredecessorPostOrder(Node<T> p) {
+		throw new RuntimeException("Implement");
+	}
 }

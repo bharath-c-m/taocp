@@ -1,14 +1,57 @@
 package art.of.programming.ds.tree;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import org.junit.Before;
 import org.junit.Ignore;
 public class ThreadedBinaryTreeTest {
 
+	ThreadedBinaryTree<String> tb;
+	
+	@Before
+	@SuppressWarnings(value={"unused"}) //Leaving unused declarations for future use
+	public void init() {
+		String a = "A";
+		String b = "B";
+		String c = "C";
+		String d = "D";
+		String e = "E";
+		String f = "F";
+		String g = "G";
+		String h = "H";
+		String j = "J";
+		
+		Node<String> nA = null;
+		Node<String> nB = null;
+		Node<String> nC = null;
+		Node<String> nD = null;
+		Node<String> nE = null;
+		Node<String> nF = null;
+		Node<String> nG = null;
+		Node<String> nH = null;
+		Node<String> nJ = null;
+		
+		tb = new ThreadedBinaryTree<>();
+		assertNotNull(tb.getHead());
+		
+		nA = tb.insertLeftSubTree(tb.getHead(), a);
+		nB = tb.insertLeftSubTree(nA, b);
+		nC = tb.insertRightSubTree(nA, c);
+		nD = tb.insertLeftSubTree(nB, d);
+		nE = tb.insertLeftSubTree(nC, e);
+		nF = tb.insertRightSubTree(nC, f);
+		nG = tb.insertRightSubTree(nE, g);
+		nH = tb.insertLeftSubTree(nF, h);
+		nJ = tb.insertRightSubTree(nF, j);
+		
+		assertSame(tb.head, nA.LLINK.LLINK.LLINK);
+		assertSame(tb.head, nA.RLINK.RLINK.RLINK.RLINK);
+	}
 	
 	@Test
 	public void testGetSuccessorPredcessorInOrder() throws Exception {
@@ -272,5 +315,70 @@ public class ThreadedBinaryTreeTest {
 		return root;
  	}
 
+	@Test
+	public void testGetSuccessorPreOrder() throws Exception {
+		
+		/**
+		 * Pre-Order traversal
+		 * A-B-D-C-E-G-F-H-J
+		 * 
+		 */
+		
+		Node<String> a = tb.getSuccessorPreOrder(tb.head);
+		Node<String> b = tb.getSuccessorPreOrder(a);
+		Node<String> d = tb.getSuccessorPreOrder(b);
+		Node<String> c = tb.getSuccessorPreOrder(d);
+		Node<String> e = tb.getSuccessorPreOrder(c);
+		Node<String> g = tb.getSuccessorPreOrder(e);
+		Node<String> f = tb.getSuccessorPreOrder(g);
+		Node<String> h = tb.getSuccessorPreOrder(f);
+		Node<String> j = tb.getSuccessorPreOrder(h);
+		Node<String> head = tb.getSuccessorPreOrder(j);
+		
+		assertEquals("A", a.t);
+		assertEquals("B", b.t);
+		assertEquals("C", c.t);
+		assertEquals("D", d.t);
+		assertEquals("E", e.t);
+		assertEquals("F", f.t);
+		assertEquals("G", g.t);
+		assertEquals("H", h.t);
+		assertEquals("J", j.t);
+		assertSame(head, tb.head);
+		
+	}
 
+	@Test
+	@Ignore
+	public void testGetPredecessorPreOrder() throws Exception {
+		
+		Node<String> a = tb.getSuccessorPreOrder(tb.head);
+		Node<String> b = tb.getSuccessorPreOrder(a);
+		Node<String> d = tb.getSuccessorPreOrder(b);
+		Node<String> c = tb.getSuccessorPreOrder(d);
+		Node<String> e = tb.getSuccessorPreOrder(c);
+		Node<String> g = tb.getSuccessorPreOrder(e);
+		Node<String> f = tb.getSuccessorPreOrder(g);
+		Node<String> h = tb.getSuccessorPreOrder(f);
+		Node<String> j = tb.getSuccessorPreOrder(h);
+		tb.getSuccessorPreOrder(j);
+		
+		assertEquals("A", tb.getPredecessorPreOrder(b).t);
+		assertEquals("A", tb.getPredecessorPreOrder(c).t);
+		
+		assertEquals("D", tb.getPredecessorPreOrder(c).t);
+		assertEquals("G", tb.getPredecessorPreOrder(f).t);
+	}
+
+	@Test
+	@Ignore
+	public void testGetSuccessorPostOrder() throws Exception {
+		throw new RuntimeException("not yet implemented");
+	}
+
+	@Test
+	@Ignore
+	public void testGetPredecessorPostOrder() throws Exception {
+		throw new RuntimeException("not yet implemented");
+	}
 }
