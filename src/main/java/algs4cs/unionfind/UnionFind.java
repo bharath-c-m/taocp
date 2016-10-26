@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import edu.princeton.cs.introcs.StdIn;
 
 /**
- * mvn exec:java  -Dexec.mainClass=algs4cs.unionfind -Dexec.arguments=<$file_location
+ * mvn exec:java  -Dexec.mainClass=algs4cs.unionfind.UnionFind -Dexec.arguments=<$file_location
  * Ex: mvn exec:java  -Dexec.mainClass=algs4cs.unionfind.UnionFind -Dexec.arguments=<data/tinyUF.txt
  * 
  * The test data files required to test this application can be found at,
@@ -19,7 +19,7 @@ import edu.princeton.cs.introcs.StdIn;
  * Executing the app with largeUF.txt results in 6 components 
  *  
  * Caution: Testing largeUF.txt using this algorithm takes a very long time. It took about 16 minutes in my machine. 
- * @see QuickUnionFind.java for improved performance
+ * @see WeightedQuickUnion.java for improved performance
  * 
  * 
  */
