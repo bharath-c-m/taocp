@@ -19,28 +19,17 @@ public class SelectionSort<T> {
 
 	Comparable<T> t[];
 	
-	@SuppressWarnings({"rawtypes","unchecked"})
-	//TODO refactor the code to be typesafe
-	public boolean less(Comparable c1, Comparable c2) {
-		return c1.compareTo(c2)<0;
-	}
-	
-	public void exchange(int p, int q) {
-		Comparable<T> x = t[p];
-		t[p] = t[q];
-		t[q] = x;
-		
-	}
+	SortUtils.StatsCollector s = SortUtils.newStatsCollector();
 	
 	public Comparable<T>[] sort() {
 		for(int i = 0; i<t.length; i++) {
 			int smallIndex = i;
 			for(int j = i+1; j<t.length; j++) {
-				if(less(t[j], t[smallIndex])) {
+				if(SortUtils.less(t[j], t[smallIndex], s)) {
 					smallIndex = j;
 				}
 			}
-			exchange(i, smallIndex);
+			SortUtils.exchange(t, i, smallIndex, s);
 		}
 		return t;
 	}
@@ -53,5 +42,6 @@ public class SelectionSort<T> {
 		si.sort();
 		si.l.info("After Sorting - ");
 		si.l.info(Arrays.toString(si.t));
+		si.s.printStats();
 	}
 }
