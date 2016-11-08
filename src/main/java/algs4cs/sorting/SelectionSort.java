@@ -21,6 +21,13 @@ public class SelectionSort<T> {
 	
 	SortUtils.StatsCollector s = SortUtils.newStatsCollector();
 	
+	public SelectionSort() {
+	}
+	
+	public SelectionSort(Comparable<T>[] t) {
+		this.t = t;
+	}
+	
 	public Comparable<T>[] sort() {
 		for(int i = 0; i<t.length; i++) {
 			int smallIndex = i;

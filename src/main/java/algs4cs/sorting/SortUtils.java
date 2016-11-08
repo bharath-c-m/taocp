@@ -50,7 +50,7 @@ public class SortUtils {
 		}
 		
 		void printStats() {
-			l.info("exchangeCount:{}, exchangeCount:{}", exchangeCount, compareCount);
+			l.info("exchangeCount:{}, compareCount:{}", exchangeCount, compareCount);
 		}
 	}
 }
