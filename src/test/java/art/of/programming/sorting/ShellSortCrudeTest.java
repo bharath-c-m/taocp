@@ -22,8 +22,9 @@ public class ShellSortCrudeTest {
 
 	@Test
 	public void testSort() throws Exception {
-		Integer[] toSort = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
-		StdRandom.shuffle(toSort);
+		Integer[] toSort = new Integer[]{7, 14, 8, 11, 6, 2, 3, 16, 10, 13, 12, 9, 4, 1, 5, 15};
+//		StdRandom.shuffle(toSort);
+//		System.out.println(Arrays.toString(toSort));
 		ShellSortCrude<Integer> shellSortInteger = new ShellSortCrude<>(toSort);
 		shellSortInteger.sort();
 
