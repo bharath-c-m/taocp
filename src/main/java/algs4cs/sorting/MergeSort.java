@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import edu.princeton.cs.introcs.StdIn;
 
 /**
- * mvn exec:java  -Dexec.mainClass=art.of.programming.sorting.BubbleSort -Dexec.arguments=<$file_location
+ * mvn exec:java  -Dexec.mainClass=art.of.programming.sorting.MergeSort -Dexec.arguments=<$file_location
  * Ex: mvn exec:java  -Dexec.mainClass=algs4cs.sorting.MergeSort -Dexec.arguments=<data/tinyInts.txt
  * Ex: mvn exec:java  -Dexec.mainClass=algs4cs.sorting.MergeSort -Dexec.arguments=<data/alpha.txt
  * 
