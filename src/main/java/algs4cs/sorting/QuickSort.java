@@ -55,9 +55,14 @@ public class QuickSort<T extends Comparable<T>> {
 	
 	public static void main(String[] args) {
 		QuickSort<Integer> q = new QuickSort<>(Arrays.stream(StdIn.readAllInts()).boxed().toArray(Integer[]::new));
-		q.l.info("Before sorting - {}", Arrays.toString(q.t));
+		q.l.debug("Before sorting - {}", Arrays.toString(q.t));
 		q.sort(0, q.t.length-1);
-		q.l.info("After sorting - {}", Arrays.toString(q.t));
+		q.l.debug("After sorting - {}", Arrays.toString(q.t));
 		q.sc.printStats();
+		
+		q.l.info("Sorting complete -- verifying sort order");
+		boolean b=SortUtils.testSortedAscending(q.t);
+		q.l.info("Sorting complete result: {}",b);
+		
 	}
 }

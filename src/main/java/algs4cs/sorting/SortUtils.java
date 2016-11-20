@@ -53,4 +53,17 @@ public class SortUtils {
 			l.info("exchangeCount:{}, compareCount:{}", exchangeCount, compareCount);
 		}
 	}
+
+	@SuppressWarnings({"rawtypes","unchecked"})
+	public static boolean testSortedAscending(Comparable[] t) {
+		boolean sorted=true;
+		if(t!=null && t.length > 1) {
+			Comparable p = t[0];
+			for(int i=1; i<t.length && sorted; i++) {
+				sorted = p.compareTo(t[i]) <=0;
+				p=t[i];
+			}
+		}
+		return sorted;
+	}
 }

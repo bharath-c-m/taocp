@@ -44,17 +44,17 @@ public class InsertionSort<T> {
 	}
 	
 	public static void main(String[] args) {
-		StdDraw.setCanvasSize(500, 500);
-		StdDraw.setXscale();
-		StdDraw.setYscale();
 		InsertionSort<Integer> si = new InsertionSort<>();
 		si.t =  Arrays.stream(StdIn.readAllInts()).boxed().toArray(Integer[]::new);
-		si.l.info("Before Sorting - ");
-		si.l.info(Arrays.toString(si.t));
+		si.l.debug("Before Sorting - ");
+		si.l.debug(Arrays.toString(si.t));
 		si.sort();
-		si.l.info("After Sorting - ");
-		si.l.info(Arrays.toString(si.t));
+		si.l.debug("After Sorting - ");
+		si.l.debug(Arrays.toString(si.t));
 		si.statsCollector.printStats();
+		si.l.info("Sorting complete -- verifying sort order");
+		boolean b=SortUtils.testSortedAscending(si.t);
+		si.l.info("Sorting complete result: {}",b);
 		
 	}
 }
