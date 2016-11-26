@@ -3,6 +3,8 @@ package algs4cs.sorting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import art.of.programming.ds.ResizingArray;
+
 public class SortUtils {
 
 	static Logger l = LoggerFactory.getLogger(SortUtils.class);
@@ -65,5 +67,11 @@ public class SortUtils {
 			}
 		}
 		return sorted;
+	}
+
+	public static void exchange(ResizingArray t, int p, int q) {
+		Object x = t.get(p);
+		t.set(p,t.get(q));
+		t.set(q,x);
 	}
 }
