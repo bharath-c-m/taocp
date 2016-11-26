@@ -90,5 +90,13 @@ public class ResizingArray<T> {
 		}
 		o[i] = t;
 	}
+
+	public int length() {
+		return len;
+	}
+	
+	public int  size() {
+		return getN();
+	}
 	
 }
