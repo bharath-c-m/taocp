@@ -1,5 +1,9 @@
 package art.of.programming.ds;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.stream.Stream;
+
 /**
  *
  * A very crude implementation of a re-sizing array.
@@ -13,7 +17,7 @@ package art.of.programming.ds;
  * the array doesnt grow down
  * @param <T>
  */
-public class ResizingArray<T> {
+public class ResizingArray<T> implements Iterable<T>{
 
 	Object[] o;
 	private int N;
@@ -32,7 +36,6 @@ public class ResizingArray<T> {
 	}
 	
 	private void reSize(int newSize) {
-		System.out.println("Printing newSize "+newSize);
 			Object[] newOb = new Object[newSize];
 			for(int i=0; i<o.length; i++) {
 				newOb[i] = o[i];
@@ -99,4 +102,17 @@ public class ResizingArray<T> {
 		return getN();
 	}
 	
+	public String toString() {
+		return Arrays.deepToString(o);
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return (Iterator<T>)Arrays.asList(o).iterator();
+//		return null;
+	}
+	
+	public Stream<T> stream() {
+		return (Stream<T>)Arrays.asList(o).stream();
+	}
 }
