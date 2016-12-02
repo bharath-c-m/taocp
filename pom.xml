@@ -41,6 +41,11 @@
     <artifactId>stdlib-package</artifactId>
     <version>1.0</version>
   </dependency>
+  <dependency>
+    <groupId>com.googlecode.princeton-java-algorithms</groupId>
+    <artifactId>algorithms</artifactId>
+    <version>4.0.1</version>
+</dependency>
   </dependencies>
   <repositories>
   <repository>
@@ -48,5 +53,6 @@
     <name>Algs4 coursera course custom repository</name>
     <url>https://raw.github.com/slok/algs4-mvn-repo/master</url>
   </repository>
+
 </repositories>
 </project>
