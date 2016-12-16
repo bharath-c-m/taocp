@@ -20,12 +20,12 @@ import edu.princeton.cs.introcs.Stopwatch;
    [algs4cs.sorting.SortCompare.main()] INFO algs4cs.sorting.SortCompare - For n=100000 items, InsertionSort is 1.6625247226760684 times faster than SelectionSort
  * @param <T>
  */
-public class SortCompare<T> {
+public class SortCompare<T extends Comparable<T>> {
 	static Logger l = LoggerFactory.getLogger(SortCompare.class);
 	
-	Comparable<T> t[];
+	T t[];
 	
-	public double time(String alg, Comparable<T> t[]) {
+	public double time(String alg, T t[]) {
 		Stopwatch timer = new Stopwatch();
 		if(alg.equals("InsertionSort")) {
 			InsertionSort<T> i = new InsertionSort<>(t);
@@ -33,6 +33,12 @@ public class SortCompare<T> {
 		} else if(alg.equals("SelectionSort")) {
 			SelectionSort<T> s = new SelectionSort<>(t);
 			s.sort();
+		} else if(alg.equals("QuickSort")) {
+			QuickSort<T> q = new QuickSort<>(t);
+			q.sort();
+		} else if(alg.equals("MergeSort")) {
+			MergeSort<T> m = new MergeSort<>(t);
+			m.sort();
 		}
 		return timer.elapsedTime();
 	}
@@ -45,6 +51,7 @@ public class SortCompare<T> {
 			for(int i=0; i<n; i++) {
 				a[i] = StdRandom.uniform();
 			}
+			StdRandom.shuffle(a);
 			total += sd.time(alg, Arrays.stream(a).boxed().toArray(Double[]::new));
 		}
 		
@@ -52,15 +59,16 @@ public class SortCompare<T> {
 	}
 	
 	public static void main(String a[]) {
-		String alg1 = "InsertionSort";
-		String alg2 = "SelectionSort";
-		int n = 10_000;
+		String alg1 = "QuickSort";
+		String alg2 = "MergeSort";
+		int n = 1_000_000;
+//		int n = 10;
 		int t = 5;
 		double t1 = timeRandom(alg1, n, t);
 		double t2 = timeRandom(alg2, n, t);
 		l.info("Time taken by {} is {}", alg1, t1);
 		l.info("Time taken by {} is {}", alg2, t2);
-		l.info("For n={} items, {} is {} times faster than {}", n, alg1, t1/t2, alg2);
+		l.info("For n={} items, {} is {} times {} than {}", n, alg1, t1/t2, (t1/t2>1?"slower":(t1/t2<1?"faster":"same :)")), alg2);
 	}
 
 }

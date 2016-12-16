@@ -63,6 +63,11 @@ public class MergeSort<T extends Comparable<T>> {
 		}
 	}
 	
+	public void sort() {
+		sort(0, this.t.length-1);
+		statsCollector.printStats();
+	}
+	
 	public static void main(String[] args) {
 //		MergeSort<Integer> m = new MergeSort<>(Arrays.stream(StdIn.readAllInts()).boxed().toArray(Integer[]::new));
 		MergeSort<String> m = new MergeSort<>(Arrays.stream(StdIn.readAllStrings()).toArray(String[]::new));

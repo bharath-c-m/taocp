@@ -53,6 +53,11 @@ public class QuickSort<T extends Comparable<T>> {
 		sort(j+1, hi);
 	}
 	
+	public void sort() {
+		sort(0, this.t.length-1);
+		sc.printStats();
+	}
+	
 	public static void main(String[] args) {
 		QuickSort<Integer> q = new QuickSort<>(Arrays.stream(StdIn.readAllInts()).boxed().toArray(Integer[]::new));
 		q.l.debug("Before sorting - {}", Arrays.toString(q.t));

@@ -74,4 +74,21 @@ public class SortUtils {
 		t.set(p,t.get(q));
 		t.set(q,x);
 	}
+
+	@SuppressWarnings({"rawtypes","unchecked"})
+	public boolean isEqual(Comparable c1, Comparable c2) {
+		return c1.compareTo(c2)==0;
+	}
+	
+	@SuppressWarnings({"rawtypes","unchecked"})
+	public static boolean isEqual(Comparable c1, Comparable c2, StatsCollector s) {
+		s.incerementCompareCount();
+		return c1.compareTo(c2)==0;
+	}
+	
+	@SuppressWarnings({"rawtypes","unchecked"})
+	public static int compare(Comparable c1, Comparable c2, StatsCollector s) {
+		s.incerementCompareCount();
+		return c1.compareTo(c2);
+	}
 }
