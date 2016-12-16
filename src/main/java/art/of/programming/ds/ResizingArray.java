@@ -115,4 +115,14 @@ public class ResizingArray<T> implements Iterable<T>{
 	public Stream<T> stream() {
 		return (Stream<T>)Arrays.asList(o).stream();
 	}
+	
+	public void remove(int index) {
+		if(index>N||index<0) {
+			throw new RuntimeException(String.format("Index: %d out of bounds of %d ", index, N));
+		}
+		while(index<N) {
+			o[index]=o[++index];
+		}
+		o[N--]=null;
+	}
 }
