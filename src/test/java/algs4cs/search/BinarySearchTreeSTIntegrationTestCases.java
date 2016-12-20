@@ -153,15 +153,30 @@ public class BinarySearchTreeSTIntegrationTestCases {
 	}
 
 	@Test
-	@Ignore
 	public void testDeleteMin() throws Exception {
-		throw new RuntimeException("not yet implemented");
+		BinarySearchTreeST<Integer, String> bst=new BinarySearchTreeST<>();
+		bst.put(7, "H");//root
+		bst.put(2, "E");//l1
+		bst.put(8, "L");//r1
+		bst.put(5, "A");//l1r1
+		bst.put(12, "O");//r1r2
+		assertEquals(1, bst.rank(5));
+		bst.deleteMin();
+		assertEquals(0, bst.rank(5)); //Rank lowers to 0
+		
 	}
 
 	@Test
-	@Ignore
 	public void testDeleteMax() throws Exception {
-		throw new RuntimeException("not yet implemented");
+		BinarySearchTreeST<Integer, String> bst=new BinarySearchTreeST<>();
+		bst.put(7, "H");//root
+		bst.put(2, "E");//l1
+		bst.put(8, "L");//r1
+		bst.put(5, "A");//l1r1
+		bst.put(12, "O");//r1r2
+		assertEquals(5, bst.rank(13));
+		bst.deleteMax();
+		assertEquals(4, bst.rank(13)); //Rank lowers to 0
 	}
 
 	@Test

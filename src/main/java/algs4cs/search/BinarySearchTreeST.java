@@ -161,10 +161,33 @@ public class BinarySearchTreeST<K extends Comparable<K>, V> {
 		}
 	}
 	public Node deleteMin() {
-		return null;
+		root=deleteMin(root);
+		return root;
+	}
+	private Node deleteMin(Node x) {
+		if(x==null)
+			return null;
+		if(x.left!=null) {
+			x.left=deleteMin(x.left);
+			return x;
+		}
+		else 
+			return x.right;
+		
 	}
 	public Node deleteMax() {
-		return null;
+		root=deleteMax(root);
+		return root;
+	}
+	private Node deleteMax(Node x) {
+		if(x==null)
+			return null;
+		if(x.right!=null) {
+			x.right=deleteMax(x.right);
+			return x;
+		} else {
+			return x.left;
+		}
 	}
 	public Node delete(K k) {
 		return null;
