@@ -180,21 +180,68 @@ public class BinarySearchTreeSTIntegrationTestCases {
 	}
 
 	@Test
-	@Ignore
 	public void testDelete() throws Exception {
-		throw new RuntimeException("not yet implemented");
+		BinarySearchTreeST<Integer, String> bst=new BinarySearchTreeST<>();
+		bst.put(7, "H");//root
+		bst.put(2, "E");//l1
+		bst.put(8, "L");//r1
+		bst.put(5, "A");//l1r1
+		bst.put(12, "O");//r1r2
+		bst.put(9, "P");//r1r2l1
+		bst.put(1, "X");//l1l1
+		bst.put(4, "Y");//l1r1l2
+		bst.put(6, "Z");//l1r1r2
+		StringBuilder sb = new StringBuilder();
+		bst.keys().forEach((i)->sb.append(i));
+		assertEquals("1245678912",sb.toString());
+		
+		bst.delete(5);
+		sb.delete(0, sb.length());
+		bst.keys().forEach((i)->sb.append(i));
+		assertEquals("124678912",sb.toString());
+		
+		bst.delete(1);
+		sb.delete(0, sb.length());
+		bst.keys().forEach((i)->sb.append(i));
+		assertEquals("24678912",sb.toString());
+		
+		bst.delete(9);
+		sb.delete(0, sb.length());
+		bst.keys().forEach((i)->sb.append(i));
+		assertEquals("2467812",sb.toString());
+		
+
+		bst.delete(2);
+		sb.delete(0, sb.length());
+		bst.keys().forEach((i)->sb.append(i));
+		assertEquals("467812",sb.toString());
+		
+		bst.delete(7);
+		sb.delete(0, sb.length());
+		bst.keys().forEach((i)->sb.append(i));
+		assertEquals("46812",sb.toString());
 	}
 
 	@Test
-	@Ignore
 	public void testKeys() throws Exception {
-		throw new RuntimeException("not yet implemented");
+		//Covered by test=testInOrderIteration
 	}
 
 	@Test
-	@Ignore
-	public void testKeysKK() throws Exception {
-		throw new RuntimeException("not yet implemented");
+	public void testKeysHiLo() throws Exception {
+		BinarySearchTreeST<Integer, String> bst=new BinarySearchTreeST<>();
+		bst.put(7, "H");//root
+		bst.put(2, "E");//l1
+		bst.put(8, "L");//r1
+		bst.put(5, "A");//l1r1
+		bst.put(12, "O");//r1r2
+		bst.put(9, "P");//r1r2l1
+		bst.put(1, "X");//l1l1
+		bst.put(4, "Y");//l1r1l2
+		bst.put(6, "Z");//l1r1r2
+		StringBuilder sb = new StringBuilder();
+		bst.keys(2, 9).forEach((i)->sb.append(i));
+		assertEquals("2456789",sb.toString());
 	}
 	
 	@Test
@@ -210,5 +257,54 @@ public class BinarySearchTreeSTIntegrationTestCases {
 		b.put("T", 1);
 		b.put("C", 1);
 		b.printBinaryTree();
+	}
+	
+	@Test
+	public void testInOrderIteration() {
+		BinarySearchTreeST<Integer, String> bst=new BinarySearchTreeST<>();
+		bst.put(7, "H");//root
+		bst.put(2, "E");//l1
+		bst.put(8, "L");//r1
+		bst.put(5, "A");//l1r1
+		bst.put(12, "O");//r1r2
+		bst.put(9, "P");//r1r2l1
+		bst.put(1, "X");//l1l1
+		bst.put(4, "Y");//l1r1l2
+		bst.put(6, "Z");//l1r1r2
+		StringBuilder sb = new StringBuilder();
+		bst.keys().forEach((i)->sb.append(i));
+		assertEquals("1245678912",sb.toString());
+	}
+	
+	@Test
+	public void testFindMin() {
+		BinarySearchTreeST<Integer, String> bst=new BinarySearchTreeST<>();
+		bst.put(7, "H");//root
+		bst.put(2, "E");//l1
+		bst.put(8, "L");//r1
+		bst.put(5, "A");//l1r1
+		bst.put(12, "O");//r1r2
+		bst.put(9, "P");//r1r2l1
+		bst.put(1, "X");//l1l1
+		bst.put(4, "Y");//l1r1l2
+		bst.put(6, "Z");//l1r1r2
+		assertEquals(1, bst.findMin().k.intValue());
+		assertEquals("X", bst.findMin().v);
+	}
+	
+	@Test
+	public void testFindMax() {
+		BinarySearchTreeST<Integer, String> bst=new BinarySearchTreeST<>();
+		bst.put(7, "H");//root
+		bst.put(2, "E");//l1
+		bst.put(8, "L");//r1
+		bst.put(5, "A");//l1r1
+		bst.put(12, "O");//r1r2
+		bst.put(9, "P");//r1r2l1
+		bst.put(1, "X");//l1l1
+		bst.put(4, "Y");//l1r1l2
+		bst.put(6, "Z");//l1r1r2
+		assertEquals(12, bst.findMax().k.intValue());
+		assertEquals("O", bst.findMax().v);
 	}
 }

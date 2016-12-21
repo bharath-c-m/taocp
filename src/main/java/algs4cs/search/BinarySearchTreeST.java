@@ -1,6 +1,12 @@
 package algs4cs.search;
 
-public class BinarySearchTreeST<K extends Comparable<K>, V> {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+
+public class BinarySearchTreeST<K extends Comparable<K>, V>  {
 
 	Node root;
 	
@@ -75,6 +81,29 @@ public class BinarySearchTreeST<K extends Comparable<K>, V> {
 			return x.v;
 		else return min(x.left);
 	}
+	
+	public Node findMin() {
+		return findMin(root);
+	}
+	private Node findMin(Node x) {
+		if(x==null)
+			return null;
+		if(x.left==null)
+			return x;
+		else return findMin(x.left);
+	}
+	
+	public Node findMax() {
+		return findMax(root);
+	}
+	private Node findMax(Node x) {
+		if(x==null)
+			return null;
+		if(x.right==null)
+			return x;
+		else return findMax(x.right);
+	}
+	
 	public V max() {
 		return max(root);
 	}
@@ -189,23 +218,52 @@ public class BinarySearchTreeST<K extends Comparable<K>, V> {
 			return x.left;
 		}
 	}
-	public Node delete(K k) {
-		return null;
+	public void delete(K k) {
+		root=delete(root, k);
 	}
-	public Iterable<K> keys() {
-		return null;
-	}
-	public Iterable<K> keys(K lo, K hi) {
-		return null;
+	private Node delete(Node x, K k) {
+		if(x==null || k==null) {
+			return null;
+		}
+		int c=k.compareTo(x.k);
+		if(c<0) {//go left
+			x.left=delete(x.left, k);
+		} else if (c>0) {//go right
+			x.right=delete(x.right, k);
+		} else { //found match
+			if(x.right==null)
+				return x.left;
+			if(x.left==null)
+				return x.right;
+			Node t=findMin(x.right);
+			x.right=deleteMin(x.right);
+			x.k=t.k;
+			x.v=t.v;
+			x.N=size(x.left)+size(x.right)+1;
+		}
+		return x;
 	}
 	
-	Node getTestNodeRef() {
-		BinarySearchTreeST<Integer, String> bst=new BinarySearchTreeST<Integer, String>();
-		Node node=new Node();
-		
-		return node;
+	public Iterable<K> keys() {
+		List<K> keys=new ArrayList<>();
+		if(root==null)
+			return keys;
+		keys(root, keys);
+		return keys;
 	}
-
+	private void keys(Node x, List<K> keys) {
+		if(x==null)
+			return;
+		keys(x.left, keys);
+		keys.add(x.k);
+		keys(x.right, keys);
+	}
+	public Iterable<K> keys(K lo, K hi) {
+		List<K> subKeys=new ArrayList<>();
+		keys().forEach((k)->{if(k.compareTo(lo)>=0&&k.compareTo(hi)<=0)subKeys.add(k);});
+		return subKeys;
+	}
+	
 	//Prints the tree in-order
 	public void printBinaryTree() {
 		assert root!=null:"Tree is empty";
@@ -215,7 +273,8 @@ public class BinarySearchTreeST<K extends Comparable<K>, V> {
 		if(x==null)
 			return;
 		print(x.left);
-		System.out.println(x.k);
+		System.out.println(x.k+"::"+x.v);
 		print(x.right);
 	}
+	
 }
