@@ -76,6 +76,18 @@ public class Graph {
 		return adj[v];
 	}
 	
+	public static boolean hasEdge(Graph g, int v, int w) {
+		assert g!=null:"Graph instance has to be non-null";
+		boolean hasEdge=false;
+		for(int x:g.adj(v)) {
+			if(x==w) {
+				hasEdge=true;
+				break;
+			} 
+		}
+		return hasEdge;
+	}
+	
 	public String toString() {
 		StringBuilder sb=new StringBuilder();
 		for(int v=0; v<V; v++) {
