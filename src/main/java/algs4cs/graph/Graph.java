@@ -88,6 +88,36 @@ public class Graph {
 		return hasEdge;
 	}
 	
+	/**
+	 * @param g
+	 * @return a vertex index that can safely be removed from graph and yet retain the graph connected. -1 if there is no such possible vertex
+	 * 
+	 * Assumes the graph is connected already
+	 * 
+	 * Uses dfs.
+	 */
+	public static int canSafeRemoveVertex(Graph g) {
+		int v=0; int index=-1; 
+		boolean marked[]=new boolean[g.V()];
+		marked[v]=true;
+		while(v<g.V()) {
+			boolean allMarked=true;
+			for(int w:g.adj(v)) {
+				if(!marked[w]){
+					allMarked=false;
+					marked[v]=true;
+					break;
+				}
+			}
+			if(allMarked) {
+				index=v;
+				break;
+			}
+			v++;
+		}
+		return index;
+	}
+	
 	public String toString() {
 		StringBuilder sb=new StringBuilder();
 		for(int v=0; v<V; v++) {
@@ -103,5 +133,7 @@ public class Graph {
 		In i = new In(args[0]);
 		Graph g = new Graph(i);
 		System.out.println(g);
+		
+		
 	}
 }
